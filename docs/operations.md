@@ -22,9 +22,18 @@ Google Cloud 웹용 OAuth 클라이언트를 만든 후 Supabase Authentication�
 
 ## Vercel
 
-대상 후보: `tiredestest's projects` 팀 / `subpidea` 프로젝트. 현재 배포하지 않았습니다. 자동 승인 검토에서 계정·프로젝트·공개 대상의 명시적 승인이 없다는 이유로 배포를 거절했고 로컬 CLI도 로그인되지 않았습니다. 목적지를 지정한 배포 승인과 로그인 후 진행합니다.
+`tiredestest's projects` 팀의 무료 Hobby 요금제를 확인하고 `subpidea` 프로젝트에 Preview 배포했습니다. 사용자가 목적지와 미리보기 공개를 승인했고 공식 CLI 로그인도 완료했습니다.
 
-환경 변수는 `.env.example`의 세 값이며 서비스 역할 키는 웹앱에 필요하지 않습니다. 실제 배포 URL을 Auth 허용 목록에 추가해야 합니다. 무료 요금제 범위는 배포 시 계정에서 확인하며 유료 전환은 별도 동의 없이 하지 않습니다.
+- 미리보기: https://subpidea-o427sx4td-tiredestests-projects.vercel.app
+- 프로젝트 ID: `prj_2OkgSjTE63cBu1i2CEOPxkywF8Fy`
+- 배포 ID: `dpl_D7FN3vT8M7Nd83Tb6MMevwzTQMZi`, READY
+- 배포 보호가 켜져 있어 브라우저에서 Vercel 로그인이 필요합니다. 공식 `vercel curl`로 홈의 실제 카탈로그와 캐릭터 이미지 HTTP 200을 확인했습니다.
+- GitHub 소스는 저장됐지만 Vercel GitHub 자동 배포 연결은 실패했습니다. Vercel 프로젝트 Settings → Git에서 저장소 접근 권한을 연결해야 합니다. 현재는 CLI 수동 배포입니다.
+- 재배포 명령: `npx vercel@59.23.2 deploy --yes --target preview --scope tiredestests-projects`
+
+첫 기본 대상 빌드는 파일 제외 규칙 문제로 실패했고 공개 앱으로 완성되지 않았습니다. `/supabase/` 제외 경로를 최상위로 한정한 뒤 Preview 대상을 명시한 재배포가 성공했습니다. `.vercelignore` 변경 시 `vercel deploy --dry --json`으로 앱 소스 포함과 자료·환경 파일 제외를 확인합니다.
+
+Preview 환경에 Supabase URL과 publishable key를 설정했습니다. 서비스 역할 키는 웹앱에 필요하지 않습니다. OAuth 활성화 시 실제 배포 URL의 `/auth/callback`을 Supabase 허용 목록에 추가해야 합니다. `NEXT_PUBLIC_APP_URL`은 사이트 주소용 예약 설정이며 현재 로그인 리디렉션은 브라우저 origin을 사용합니다. 유료 전환은 하지 않았습니다.
 
 ## 남은 범위와 제약
 
