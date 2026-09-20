@@ -1,0 +1,4 @@
+import {getCatalog,gamePath} from '@/lib/catalog';
+import {ContentCard,Empty,Breadcrumb} from '@/components/content';
+export const metadata={title:'게임'};
+export default async function Games(){const data=await getCatalog();return <div className="page-shell"><Breadcrumb items={[{label:'게임'}]}/><div className="page-heading"><span className="eyebrow blue">EXPLORE GAMES</span><h1>어떤 세계로 떠나볼까요?</h1><p>게임을 선택하면 편과 장, 캐릭터를 함께 만날 수 있어요.</p></div><div className="card-grid three">{data.games.map(game=>{const stats=data.gameStats.find(x=>x.id===game.id);return <ContentCard key={game.id} href={gamePath(game)} image={game.cover_image} title={game.title} description={game.description||`${data.arcs.filter(x=>x.game_id===game.id).length}개 편에서 이어지는 이야기`} average={stats?.average} count={stats?.count}/>;})}</div>{!data.games.length&&<Empty>공개된 게임을 준비하고 있어요.</Empty>}</div>;}

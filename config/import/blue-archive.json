@@ -1,0 +1,16 @@
+{
+  "game": {"source_id": "BA", "slug": "blue-archive", "title": "블루 아카이브"},
+  "workbook": "data/raw/excel/블루아카이브.xlsx",
+  "imageDirectories": {"characters": "data/raw/images/characters", "stories": "data/raw/images/stories"},
+  "sheets": {
+    "characters": {"name": "CHARACTERS", "headerRow": 3, "fields": {"work_number": "넘버", "source_id": "character_id", "name": "name", "note": "비고", "image": "사진"}},
+    "stories": {"name": "STORIES", "headerRow": 2, "fields": {"source_id": "Story_ID", "parent_id": "Parent_ID", "kind": "Type", "title": "제목", "release_date_kr": "KR", "release_date_jp": "JP", "published": "공개상태", "summary": "줄거리"}},
+    "appearances": {"name": "Appearances", "headerRow": 2, "fields": {"story_id": "story_id", "work_number": "No", "character_id": "character_id", "name": "name", "sort_order": "display_order", "note": "note"}}
+  },
+  "storyTypes": {"arc": "VOL", "chapter": "Chapter"},
+  "storyAliases": {"BA_CHF-1": "BA_CH_F-1", "BA_CHF-2": "BA_CH_F-2", "BA_CHF-3": "BA_CH_F-3", "BA_CHF-4": "BA_CH_F-4"},
+  "quarantineCharacters": {"BA_C_187": "이름과 이미지가 없는 미사용 예약 행. 원본 보존 후 입력 대상에서 제외."},
+  "allowEmptyAppearanceRows": [250, 252, 254, 256],
+  "defaultPublication": "kr",
+  "characterPublication": "public-chapter-appearances"
+}

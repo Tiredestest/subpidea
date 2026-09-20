@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.vercel/
+.env*
+!.env.example
+*.tsbuildinfo
+coverage/
+# Original datasets and generated import reports can contain private data.
+data/raw/
+data/reports/
+data/processed/
+__pycache__/

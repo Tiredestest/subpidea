@@ -1,0 +1,3 @@
+import {userDb} from '@/lib/supabase/server';
+import {redirect,notFound} from 'next/navigation';
+export default async function Admin(){const db=await userDb();const {data:{user}}=await db.auth.getUser();if(!user)redirect('/login');if(user.app_metadata?.role!=='admin')notFound();return <div className="page-shell"><div className="page-heading"><h1>콘텐츠 관리</h1><p>공개 상태와 순서, 이미지 경로는 Supabase Studio에서 수정할 수 있습니다.</p></div><a className="button" href="https://supabase.com/dashboard/project/lbeoipqedkjmekfntcdn/editor" target="_blank" rel="noreferrer">Supabase Studio 열기 ↗</a><p className="muted">Excel 웹 업로드는 후속 운영 도구입니다. 현재는 검증 스크립트를 통해 입력합니다.</p></div>;}
