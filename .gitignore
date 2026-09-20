@@ -11,3 +11,4 @@ data/raw/
 data/reports/
 data/processed/
 __pycache__/
+supabase/.temp/
