@@ -24,9 +24,9 @@ Google Cloud 웹용 OAuth 클라이언트를 만든 후 Supabase Authentication�
 
 `tiredestest's projects` 팀의 무료 Hobby 요금제를 확인하고 `subpidea` 프로젝트에 Preview 배포했습니다. 사용자가 목적지와 미리보기 공개를 승인했고 공식 CLI 로그인도 완료했습니다.
 
-- 미리보기: https://subpidea-g1kteasu7-tiredestests-projects.vercel.app
+- 미리보기: https://subpidea-l4doyo6hv-tiredestests-projects.vercel.app
 - 프로젝트 ID: `prj_2OkgSjTE63cBu1i2CEOPxkywF8Fy`
-- 배포 ID: `dpl_BPm5FyqKTrMC3L1sDAuEPDQ6Tv5B`, READY
+- 배포 ID: `dpl_9ASwPiTqm2WULBhJH8XLhUu8o1FG`, READY
 - 배포 보호가 켜져 있어 브라우저에서 Vercel 로그인이 필요합니다. 공식 `vercel curl`로 홈의 실제 카탈로그와 캐릭터 이미지 HTTP 200을 확인했습니다.
 - GitHub 소스는 저장됐지만 Vercel GitHub 자동 배포 연결은 실패했습니다. Vercel 프로젝트 Settings → Git에서 저장소 접근 권한을 연결해야 합니다. 현재는 CLI 수동 배포입니다.
 - 재배포 명령: `npx vercel@59.23.2 deploy --yes --target preview --scope tiredestests-projects`
@@ -57,3 +57,5 @@ Preview 환경에 Supabase URL과 publishable key를 설정했습니다. 서비�
 - Google 활성화 시 허용 리디렉션 주소를 운영 주소로 제한하고 실제 로그인·로그아웃·만료 세션·타인 데이터 수정 거절을 검증해야 합니다. 비밀 키와 토큰은 저장소나 로그에 남기지 않습니다.
 - 관리자 권한 회수 시 기존 JWT의 역할 정보는 만료 전까지 남을 수 있습니다. 즉시 회수가 필요한 운영에는 DB의 최신 권한 조회 방식과 세션 폐기 검증을 추가해야 합니다. 현재 이를 즉시 회수 보장으로 간주하지 않습니다.
 - 기준 문서: https://supabase.com/docs/guides/auth/server-side/advanced-guide
+
+보안 보완 Preview 배포 완료: 인증 콜백 HTTP 307, 사이트 내부 오류 페이지 이동, Cache-Control: private, no-store 및 Referrer-Policy: no-referrer를 실제 배포에서 확인했습니다. Google 공급자는 아직 비활성 상태입니다. 최초 설정은 [Google 로그인 설정 안내](google-login-setup.md)를 따릅니다.
