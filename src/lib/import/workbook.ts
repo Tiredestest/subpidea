@@ -176,14 +176,17 @@ export function parseWorkbook(
         !r.character_id &&
         r.work_number === null &&
         !r.name &&
-        config.allowEmptyAppearanceRows.includes(Number(r._row)) &&
+        (r.sort_order === null || r.sort_order === "") &&
+        (r.note === null || r.note === "") &&
         chapters.has(story)
       ) {
         warnings.push(`등장 ${r._row}행: 빈 예약 행 제외`);
         continue;
       }
-      if (!chapters.has(story) || !characters.has(r.character_id))
-        throw Error("장 또는 캐릭터 ID가 없습니다.");
+      if (!chapters.has(story))
+        throw Error(`장 ID '${String(story ?? "")}'가 STORIES에 없습니다.`);
+      if (!characters.has(r.character_id))
+        throw Error(`캐릭터 ID '${String(r.character_id ?? "")}'가 CHARACTERS에 없습니다. No·character_id·name을 확인하고 수식을 다시 계산해 저장해 주세요.`);
       const master = numbers.get(r.work_number);
       if (
         !master ||
@@ -331,7 +334,7 @@ export function planImport(
           (r) => r.chapter_id === chapterId && r.character_id === characterId,
         );
         patch = existing
-          ? {}
+          ? {sort_order: source.sort_order}
           : {
               game_id: gameId,
               sort_order: source.sort_order,

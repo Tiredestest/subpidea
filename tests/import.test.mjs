@@ -29,7 +29,7 @@ test("real workbook preserves IDs, quarantines empty rows and enforces KR policy
       story_arcs: 12,
       chapters: 29,
       characters: 214,
-      appearances: 703,
+      appearances: 712,
     },
   );
   assert.equal(
@@ -47,7 +47,7 @@ test("real workbook preserves IDs, quarantines empty rows and enforces KR policy
 test("import is idempotent, preserves publication/images/order and missing records", () => {
   const first = planImport(parsed, empty(), randomUUID);
   assert.deepEqual(first.errors, []);
-  assert.equal(first.plans.length, 959);
+  assert.equal(first.plans.length, 968);
   const snapshot = empty();
   for (const p of first.plans)
     snapshot[p.operation.table].push({
@@ -60,12 +60,33 @@ test("import is idempotent, preserves publication/images/order and missing recor
   snapshot.characters[0].sort_order = 999;
   const again = planImport(parsed, snapshot, randomUUID);
   assert.equal(again.plans.length, 0);
-  assert.equal(again.unchanged, 959);
+  assert.equal(again.unchanged, 968);
   snapshot.chapters[0].summary = "edited in admin";
   const changed = planImport(parsed, snapshot, randomUUID);
   assert.equal(changed.plans.length, 1);
   assert.deepEqual(Object.keys(changed.plans[0].operation.patch), ["summary"]);
   assert.equal(changed.plans[0].operation.expected, "2026-09-20T00:00:00Z");
+});
+test("moved empty appearance rows are skipped but incomplete assignments are rejected", () => {
+  const moved = structuredClone(sheets);
+  const sheet = moved.find(s => s.sheet === 'Appearances');
+  const header = sheet.data[1];
+  const row = Array(header.length).fill(null);
+  row[header.indexOf('story_id')] = 'BA_CHF-1';
+  sheet.data.push(row);
+  assert.deepEqual(parseWorkbook(moved, config, '2026-09-21').errors, []);
+  row[header.indexOf('No')] = 69;
+  assert.ok(parseWorkbook(moved, config, '2026-09-21').errors.some(e => e.includes('캐릭터 ID')));
+});
+test("existing appearance order changes are previewed without deleting missing rows", () => {
+  const initial=planImport(parsed,empty(),randomUUID);
+  const snapshot=empty();
+  for(const p of initial.plans) snapshot[p.operation.table].push({...p.operation.patch,...p.operation.key,updated_at:'2026-09-20T00:00:00Z'});
+  snapshot.appearances[0].sort_order=999;
+  const result=planImport(parsed,snapshot,randomUUID);
+  assert.equal(result.plans.length,1);
+  assert.equal(result.plans[0].operation.table,'appearances');
+  assert.deepEqual(result.plans[0].operation.patch,{sort_order:parsed.records.appearances[0].sort_order});
 });
 test("missing columns and stale lookup values block all changes", () => {
   const bad = structuredClone(sheets);
