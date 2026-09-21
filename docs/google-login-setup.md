@@ -17,7 +17,7 @@ Google Auth Platform → Clients → Create client에서 유형을 Web applicati
 Authorized JavaScript origins:
 
 ```text
-https://subpidea-l4doyo6hv-tiredestests-projects.vercel.app
+https://subpidea-pav5hwgw7-tiredestests-projects.vercel.app
 ```
 
 Authorized redirect URIs (Google에서 Supabase로 돌아오는 주소):
@@ -37,13 +37,13 @@ https://supabase.com/dashboard/project/lbeoipqedkjmekfntcdn/auth/url-configurati
 Site URL:
 
 ```text
-https://subpidea-l4doyo6hv-tiredestests-projects.vercel.app
+https://subpidea-pav5hwgw7-tiredestests-projects.vercel.app
 ```
 
 Redirect URLs (Supabase에서 사이트로 돌아오는 주소):
 
 ```text
-https://subpidea-l4doyo6hv-tiredestests-projects.vercel.app/auth/callback
+https://subpidea-pav5hwgw7-tiredestests-projects.vercel.app/auth/callback
 ```
 
 미리보기 주소는 재배포 시 달라질 수 있습니다. 변경된 주소는 정확히 추가하고 불필요한 과거 주소는 제거합니다. 광범위한 `*.vercel.app` 허용은 사용하지 않습니다. Vercel 배포 보호는 별개이므로 미리보기 접근에 Vercel 로그인이 필요할 수 있습니다.
