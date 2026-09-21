@@ -3,8 +3,8 @@ import {cache} from 'react';
 import {publicDb} from './supabase/server';
 
 export type Game={id:string;slug:string;title:string;description:string;cover_image:string|null;hero_image:string|null;sort_order:number};
-export type Arc={id:string;game_id:string;slug:string;title:string;summary:string;cover_image:string|null;detail_image:string|null;sort_order:number;release_date_kr:string|null};
-export type Chapter=Omit<Arc,'game_id'>&{game_id:string;arc_id:string;published_at:string|null};
+export type Arc={id:string;game_id:string;slug:string;title:string;summary:string;cover_image:string|null;detail_image:string|null;sort_order:number;release_date_kr:string|null;story_kind:'main'|'event'};
+export type Chapter=Omit<Arc,'game_id'|'story_kind'>&{game_id:string;arc_id:string;published_at:string|null};
 export type Character={id:string;game_id:string;slug:string;name:string;description:string;image:string|null;thumbnail:string|null;sort_order:number};
 export type Appearance={chapter_id:string;character_id:string;sort_order:number};
 export type Summary={chapter_id:string;character_id:string|null;average:number;count:number};

@@ -11,9 +11,12 @@ async function main() {
   const report = JSON.parse(await fs.readFile(path.join(root, 'data/reports/source-audit.json'), 'utf8'));
   const output = path.join(root, 'data/processed', config.game.slug);
   const manifest = [];
+  const incremental = process.argv.includes('--new');
+  const previous = incremental ? JSON.parse(await fs.readFile(path.join(output,'manifest.json'),'utf8')).manifest : [];
   const background = {r: 243, g: 245, b: 249, alpha: 1};
   for (const kind of ['stories', 'characters']) {
-    const files = report.images.filter(x => x.path.startsWith(config.imageDirectories[kind] + '/'));
+    const files = report.images.filter(x => x.path.startsWith(config.imageDirectories[kind] + '/') &&
+      (!incremental || !previous.some(old=>old.kind===kind&&old.id===x.stem&&old.sha256===x.sha256)));
     const seen = new Set();
     for (const input of files) {
       if (input.error) throw new Error(`Unreadable source: ${input.path}`);
@@ -44,7 +47,7 @@ async function main() {
   }
   const result = {game: config.game.slug, quality: 82, fit: 'contain-no-upscale', manifest};
   await fs.mkdir(output, {recursive: true});
-  await fs.writeFile(path.join(output, 'manifest.json'), JSON.stringify(result, null, 2));
+  await fs.writeFile(path.join(output, incremental?'changes-manifest.json':'manifest.json'), JSON.stringify(result, null, 2));
   const totals = {};
   for (const kind of ['stories', 'characters']) {
     const entries = manifest.filter(x => x.kind === kind);

@@ -5,7 +5,9 @@ export type Mapping = {
     string,
     { name: string; headerRow: number; fields: Record<string, string> }
   >;
-  storyTypes: { arc: string; chapter: string };
+  storyTypes: { arc: string; chapter: string; event?: string };
+  storyImages?: Record<string, {cover_image: string; detail_image: string}>;
+  characterImages?: Record<string, {image: string; thumbnail: string}>;
   storyAliases: Record<string, string>;
   quarantineCharacters: Record<string, string>;
   allowEmptyAppearanceRows: number[];
@@ -128,6 +130,7 @@ export function parseWorkbook(
         source_id: key,
         slug: slug(key),
         name: r.name,
+        ...(config.characterImages?.[key] ?? {}),
         sort_order: records.characters.length,
         is_published: false,
       });
@@ -140,6 +143,11 @@ export function parseWorkbook(
       const key = id(r, "스토리");
       if (storyIds.has(key)) throw Error(`${key}: 중복 스토리 ID입니다.`);
       storyIds.add(key);
+      if (r.kind === config.storyTypes.event &&
+          [r.parent_id,r.title,r.release_date_kr,r.release_date_jp,r.published,r.summary].every(v=>v===null||v==='')) {
+        warnings.push(`${key}: 빈 이벤트 예약 행 제외`);
+        continue;
+      }
       if (typeof r.title !== "string" || !r.title.trim())
         throw Error(`${key}: 제목이 없습니다.`);
       const kr = date(r.release_date_kr),
@@ -153,6 +161,7 @@ export function parseWorkbook(
         release_date_kr: kr,
         release_date_jp: jp,
         is_published: published,
+        ...(config.storyImages?.[key] ?? {}),
       };
       if (r.published !== null && r.published !== "")
         warnings.push(
@@ -162,8 +171,13 @@ export function parseWorkbook(
         if (r.parent_id) throw Error(`${key}: 편에 부모 ID가 있습니다.`);
         records.story_arcs.push({
           ...row,
+          story_kind: 'main',
           sort_order: records.story_arcs.length,
         });
+      } else if (r.kind === config.storyTypes.event) {
+        if(r.parent_id) throw Error(`${key}: 이벤트에 부모 ID가 있습니다.`);
+        records.story_arcs.push({...row,story_kind:'event',sort_order:records.story_arcs.length});
+        records.chapters.push({...row,arc_source_id:key,sort_order:1});
       } else if (r.kind === config.storyTypes.chapter) {
         const order = key.match(/-(\d+)$/);
         if (!order) throw Error(`${key}: 장 번호를 판독할 수 없습니다.`);
@@ -183,7 +197,7 @@ export function parseWorkbook(
   for (const c of records.chapters)
     if (!arcs.has(c.arc_source_id))
       errors.push(`${c.source_id}: 존재하지 않는 부모 편 ${c.arc_source_id}`);
-  const pairs = new Set<string>(),
+  const pairs = new Map<string,string>(),
     orders = new Map<unknown, number>();
   let aliases = 0;
   for (const r of source.appearances) {
@@ -215,8 +229,13 @@ export function parseWorkbook(
           "조회 수식 결과가 일치하지 않습니다. Excel에서 다시 계산해 저장해 주세요.",
         );
       const pair = JSON.stringify([story, r.character_id]);
-      if (pairs.has(pair)) throw Error("중복 등장 관계입니다.");
-      pairs.add(pair);
+      const signature=JSON.stringify([r.work_number,r.name,r.sort_order,r.note]);
+      if (pairs.has(pair)) {
+        if(pairs.get(pair)!==signature) throw Error("값이 서로 다른 중복 등장 관계입니다.");
+        warnings.push(`등장 ${r._row}행: ${String(story)} / ${String(r.character_id)} 동일한 중복 행 제외`);
+        continue;
+      }
+      pairs.set(pair,signature);
       const order = (orders.get(story) ?? 0) + 1;
       orders.set(story, order);
       const rank = r.sort_order ?? order;

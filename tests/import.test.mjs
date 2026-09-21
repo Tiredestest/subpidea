@@ -16,29 +16,33 @@ const sheets = await readWorkbook(
     new URL("../data/raw/excel/블루아카이브.xlsx", import.meta.url),
   ),
 );
+Object.assign(config,JSON.parse(fs.readFileSync(new URL('../config/import/blue-archive-assets.json',import.meta.url),'utf8')));
 const parsed = parseWorkbook(sheets, config, "2026-09-20");
 const empty = () => Object.fromEntries(tables.map((t) => [t, []]));
 test("real workbook preserves IDs, quarantines empty rows and enforces KR policy", () => {
   assert.deepEqual(parsed.errors, []);
+  assert.equal(parsed.records.story_arcs.filter(x=>x.story_kind==='event').length,51);
+  assert.equal(parsed.records.story_arcs.filter(x=>x.story_kind==='event'&&x.is_published).length,48);
+  assert.ok(parsed.records.story_arcs.filter(x=>x.story_kind==='event'&&x.is_published).every(x=>x.cover_image&&x.detail_image));
   assert.deepEqual(
     Object.fromEntries(
       Object.entries(parsed.records).map(([k, v]) => [k, v.length]),
     ),
     {
       games: 1,
-      story_arcs: 12,
-      chapters: 29,
-      characters: 214,
-      appearances: 712,
+      story_arcs: 63,
+      chapters: 80,
+      characters: 217,
+      appearances: 1351,
     },
   );
   assert.equal(
     parsed.records.chapters.filter((x) => x.is_published).length,
-    24,
+    74,
   );
   assert.equal(
     parsed.records.characters.filter((x) => x.is_published).length,
-    173,
+    199,
   );
   assert.ok(
     parsed.records.appearances.some((x) => x.chapter_source_id === "BA_CH_F-1"),
@@ -47,7 +51,7 @@ test("real workbook preserves IDs, quarantines empty rows and enforces KR policy
 test("import is idempotent, preserves publication/images/order and missing records", () => {
   const first = planImport(parsed, empty(), randomUUID);
   assert.deepEqual(first.errors, []);
-  assert.equal(first.plans.length, 968);
+  assert.equal(first.plans.length, 1712);
   const snapshot = empty();
   for (const p of first.plans)
     snapshot[p.operation.table].push({
@@ -60,7 +64,7 @@ test("import is idempotent, preserves publication/images/order and missing recor
   snapshot.characters[0].sort_order = 999;
   const again = planImport(parsed, snapshot, randomUUID);
   assert.equal(again.plans.length, 0);
-  assert.equal(again.unchanged, 968);
+  assert.equal(again.unchanged, 1712);
   snapshot.chapters[0].summary = "edited in admin";
   const changed = planImport(parsed, snapshot, randomUUID);
   assert.equal(changed.plans.length, 1);

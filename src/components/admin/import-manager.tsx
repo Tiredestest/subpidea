@@ -9,6 +9,7 @@ type Preview = {
   warnings: string[];
   unchanged: number;
   counts: Record<string, number>;
+  stories: {main:number;events:number;publicEvents:number};
   filename: string;
 };
 export function ImportManager({
@@ -92,15 +93,17 @@ export function ImportManager({
       </form>
       <div className="admin-help">
         <p>
-          기존 공개 상태·URL·이미지와 콘텐츠 순서는 유지하며, 누락 행은 삭제하지
+          기존 공개 상태·URL·콘텐츠 순서는 유지하며, 누락 행은 삭제하지
           않습니다. 이름·줄거리·공개일·등장 순서 변경은 아래 목록에 표시됩니다. 새 게임과 캐릭터는
-          비공개, 새 스토리는 한국 공개일 기준으로 준비합니다. 신규 이미지
-          업로드는 별도입니다.
+          비공개, 새 스토리는 한국 공개일 기준으로 준비합니다. 별도로 업로드해 연결한
+          이미지는 변경 목록에 포함되며, 연결 정보가 없는 기존 이미지는 유지합니다.
+          이벤트는 STORIES 시트의 Type을 Event로 입력해 주세요.
         </p>
       </div>
       {preview && (
         <>
           <h3>{preview.filename}</h3>
+          <p>메인 {preview.stories.main}개 편 · 이벤트 {preview.stories.events}개 (한국 공개일 기준 {preview.stories.publicEvents}개)</p>
           <p>
             변경 {preview.plans.length}건 · 동일 {preview.unchanged}건 · 오류{" "}
             {preview.errors.length}건

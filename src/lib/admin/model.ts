@@ -46,7 +46,7 @@ export const definitions: Record<Table, { label: string; fields: Field[] }> = {
       ...common,
     ],
   },
-  story_arcs: { label: "편", fields: story },
+  story_arcs: { label: "편·이벤트", fields: [...story, field('story_kind','스토리 구분 (main / event)')] },
   chapters: { label: "장", fields: story },
   characters: {
     label: "캐릭터",
@@ -75,6 +75,7 @@ export const rowKey = (table: Table, row: Row): Row =>
       ? { key: row.key }
       : { id: row.id };
 export function cleanPatch(table: Table, input: Row): Row {
+  if(table==='story_arcs' && 'story_kind' in input && !['main','event'].includes(String(input.story_kind))) throw Error('스토리 구분은 main 또는 event여야 합니다.');
   const out: Row = {};
   for (const f of definitions[table].fields) {
     if (!(f.key in input)) continue;

@@ -26,7 +26,7 @@ Google Cloud 웹용 OAuth 클라이언트를 만든 후 Supabase Authentication�
 
 - 미리보기: https://subpidea-preview-tiredestests-projects.vercel.app
 - 프로젝트 ID: `prj_2OkgSjTE63cBu1i2CEOPxkywF8Fy`
-- 배포 ID: `dpl_7Xh1wVvUYsZ4935yKY3SAyuoYrh3`, READY
+- 배포 ID: `dpl_BeZ42g5Q9krb3JXVHkLBggGZZRfD`, READY
 - 배포 보호가 켜져 있어 브라우저에서 Vercel 로그인이 필요합니다. 공식 `vercel curl`로 홈의 실제 카탈로그와 캐릭터 이미지 HTTP 200을 확인했습니다.
 - GitHub 소스는 저장됐지만 Vercel GitHub 자동 배포 연결은 실패했습니다. Vercel 프로젝트 Settings → Git에서 저장소 접근 권한을 연결해야 합니다. 현재는 CLI 수동 배포입니다.
 - 재배포 명령: `./scripts/deploy-preview.ps1` (성공한 배포에 고정 주소 연결)
@@ -63,3 +63,7 @@ Preview 환경에 Supabase URL과 publishable key를 설정했습니다. 서비�
 ## 후속 기능
 
 마이페이지·닉네임 수정·게임 팔로우, 등장 캐릭터 추가/제외/복원/교체, 게임 헤더 업로드와 Excel GAMES 연결을 구현했습니다. [사용 안내](member-and-admin-followups.md)를 참고하세요. 재배포 시 scripts/deploy-preview.ps1을 사용해 고정 Preview 주소를 갱신합니다.
+
+## 2026-09-22 이벤트 지원
+
+메인·이벤트 필터와 Event Excel 가져오기를 배포했습니다. [업데이트 및 적용 안내](events-20260922.md)를 참고하세요. 이미지 102개 변환본 업로드 완료, 실제 Excel 일괄 적용은 사용자 관리자 단계로 남아 있습니다.

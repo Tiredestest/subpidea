@@ -1,4 +1,5 @@
 import readWorkbook from "read-excel-file/node";
+import assets from "../../../../../config/import/blue-archive-assets.json";
 import config from "../../../../../config/import/blue-archive.json";
 import { adminSnapshot, requireAdmin } from "@/lib/admin/server";
 import { parseWorkbook, planImport } from "@/lib/import/workbook";
@@ -72,6 +73,7 @@ export async function POST(request: Request) {
       throw Error("게임 ID·주소·이름을 확인해 주세요.");
     const mapping = {
       ...config,
+      ...(game.source_id===config.game.source_id && game.slug===config.game.slug ? assets : {}),
       game,
       ...(game.source_id === config.game.source_id
         ? {}
@@ -104,6 +106,11 @@ export async function POST(request: Request) {
       {
         ...plan,
         warnings: parsed.warnings,
+        stories: {
+          main:parsed.records.story_arcs.filter(r=>r.story_kind==='main').length,
+          events:parsed.records.story_arcs.filter(r=>r.story_kind==='event').length,
+          publicEvents:parsed.records.story_arcs.filter(r=>r.story_kind==='event'&&r.is_published).length,
+        },
         counts: Object.fromEntries(
           Object.entries(parsed.records).map(([k, v]) => [k, v.length]),
         ),

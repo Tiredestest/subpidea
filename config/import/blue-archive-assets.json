@@ -1,0 +1,210 @@
+{
+  "storyImages": {
+    "BA_EV001": {
+      "cover_image": "blue-archive/stories/BA_EV001-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV001-detail.webp"
+    },
+    "BA_EV002": {
+      "cover_image": "blue-archive/stories/BA_EV002-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV002-detail.webp"
+    },
+    "BA_EV003": {
+      "cover_image": "blue-archive/stories/BA_EV003-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV003-detail.webp"
+    },
+    "BA_EV004": {
+      "cover_image": "blue-archive/stories/BA_EV004-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV004-detail.webp"
+    },
+    "BA_EV005": {
+      "cover_image": "blue-archive/stories/BA_EV005-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV005-detail.webp"
+    },
+    "BA_EV006": {
+      "cover_image": "blue-archive/stories/BA_EV006-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV006-detail.webp"
+    },
+    "BA_EV007": {
+      "cover_image": "blue-archive/stories/BA_EV007-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV007-detail.webp"
+    },
+    "BA_EV008": {
+      "cover_image": "blue-archive/stories/BA_EV008-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV008-detail.webp"
+    },
+    "BA_EV009": {
+      "cover_image": "blue-archive/stories/BA_EV009-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV009-detail.webp"
+    },
+    "BA_EV010": {
+      "cover_image": "blue-archive/stories/BA_EV010-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV010-detail.webp"
+    },
+    "BA_EV011": {
+      "cover_image": "blue-archive/stories/BA_EV011-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV011-detail.webp"
+    },
+    "BA_EV012": {
+      "cover_image": "blue-archive/stories/BA_EV012-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV012-detail.webp"
+    },
+    "BA_EV013": {
+      "cover_image": "blue-archive/stories/BA_EV013-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV013-detail.webp"
+    },
+    "BA_EV014": {
+      "cover_image": "blue-archive/stories/BA_EV014-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV014-detail.webp"
+    },
+    "BA_EV015": {
+      "cover_image": "blue-archive/stories/BA_EV015-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV015-detail.webp"
+    },
+    "BA_EV016": {
+      "cover_image": "blue-archive/stories/BA_EV016-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV016-detail.webp"
+    },
+    "BA_EV017": {
+      "cover_image": "blue-archive/stories/BA_EV017-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV017-detail.webp"
+    },
+    "BA_EV018": {
+      "cover_image": "blue-archive/stories/BA_EV018-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV018-detail.webp"
+    },
+    "BA_EV019": {
+      "cover_image": "blue-archive/stories/BA_EV019-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV019-detail.webp"
+    },
+    "BA_EV020": {
+      "cover_image": "blue-archive/stories/BA_EV020-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV020-detail.webp"
+    },
+    "BA_EV021": {
+      "cover_image": "blue-archive/stories/BA_EV021-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV021-detail.webp"
+    },
+    "BA_EV022": {
+      "cover_image": "blue-archive/stories/BA_EV022-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV022-detail.webp"
+    },
+    "BA_EV023": {
+      "cover_image": "blue-archive/stories/BA_EV023-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV023-detail.webp"
+    },
+    "BA_EV024": {
+      "cover_image": "blue-archive/stories/BA_EV024-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV024-detail.webp"
+    },
+    "BA_EV025": {
+      "cover_image": "blue-archive/stories/BA_EV025-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV025-detail.webp"
+    },
+    "BA_EV026": {
+      "cover_image": "blue-archive/stories/BA_EV026-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV026-detail.webp"
+    },
+    "BA_EV027": {
+      "cover_image": "blue-archive/stories/BA_EV027-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV027-detail.webp"
+    },
+    "BA_EV028": {
+      "cover_image": "blue-archive/stories/BA_EV028-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV028-detail.webp"
+    },
+    "BA_EV029": {
+      "cover_image": "blue-archive/stories/BA_EV029-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV029-detail.webp"
+    },
+    "BA_EV030": {
+      "cover_image": "blue-archive/stories/BA_EV030-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV030-detail.webp"
+    },
+    "BA_EV031": {
+      "cover_image": "blue-archive/stories/BA_EV031-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV031-detail.webp"
+    },
+    "BA_EV032": {
+      "cover_image": "blue-archive/stories/BA_EV032-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV032-detail.webp"
+    },
+    "BA_EV033": {
+      "cover_image": "blue-archive/stories/BA_EV033-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV033-detail.webp"
+    },
+    "BA_EV034": {
+      "cover_image": "blue-archive/stories/BA_EV034-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV034-detail.webp"
+    },
+    "BA_EV035": {
+      "cover_image": "blue-archive/stories/BA_EV035-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV035-detail.webp"
+    },
+    "BA_EV036": {
+      "cover_image": "blue-archive/stories/BA_EV036-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV036-detail.webp"
+    },
+    "BA_EV037": {
+      "cover_image": "blue-archive/stories/BA_EV037-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV037-detail.webp"
+    },
+    "BA_EV038": {
+      "cover_image": "blue-archive/stories/BA_EV038-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV038-detail.webp"
+    },
+    "BA_EV039": {
+      "cover_image": "blue-archive/stories/BA_EV039-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV039-detail.webp"
+    },
+    "BA_EV040": {
+      "cover_image": "blue-archive/stories/BA_EV040-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV040-detail.webp"
+    },
+    "BA_EV041": {
+      "cover_image": "blue-archive/stories/BA_EV041-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV041-detail.webp"
+    },
+    "BA_EV042": {
+      "cover_image": "blue-archive/stories/BA_EV042-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV042-detail.webp"
+    },
+    "BA_EV043": {
+      "cover_image": "blue-archive/stories/BA_EV043-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV043-detail.webp"
+    },
+    "BA_EV044": {
+      "cover_image": "blue-archive/stories/BA_EV044-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV044-detail.webp"
+    },
+    "BA_EV045": {
+      "cover_image": "blue-archive/stories/BA_EV045-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV045-detail.webp"
+    },
+    "BA_EV046": {
+      "cover_image": "blue-archive/stories/BA_EV046-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV046-detail.webp"
+    },
+    "BA_EV047": {
+      "cover_image": "blue-archive/stories/BA_EV047-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV047-detail.webp"
+    },
+    "BA_EV051": {
+      "cover_image": "blue-archive/stories/BA_EV051-card.webp",
+      "detail_image": "blue-archive/stories/BA_EV051-detail.webp"
+    }
+  },
+  "characterImages": {
+    "BA_C_215": {
+      "image": "blue-archive/characters/BA_C_215-portrait.webp",
+      "thumbnail": "blue-archive/characters/BA_C_215-avatar.webp"
+    },
+    "BA_C_216": {
+      "image": "blue-archive/characters/BA_C_216-portrait.webp",
+      "thumbnail": "blue-archive/characters/BA_C_216-avatar.webp"
+    },
+    "BA_C_217": {
+      "image": "blue-archive/characters/BA_C_217-portrait.webp",
+      "thumbnail": "blue-archive/characters/BA_C_217-avatar.webp"
+    }
+  }
+}
