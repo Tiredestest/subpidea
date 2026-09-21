@@ -2,7 +2,7 @@
 
 게임 스토리와 장별 등장 캐릭터 평가 서비스.
 
-현재 단계: 실제 데이터 입력·이미지 업로드·웹앱 구현 및 Vercel 미리보기 배포 완료. 홈, 게임·편·장, 캐릭터, 검색, 평가·한줄평·좋아요 기능을 구현했다. Google OAuth 공급자 설정과 Vercel의 GitHub 자동 배포 연결은 남아 있다. 관리자 웹 편집·Excel 업로드 UI는 후속 범위이며 현재 콘텐츠 관리는 Supabase Studio에서 수행한다.
+현재 단계: 실제 데이터 입력·이미지 업로드·웹앱 구현 및 Vercel 미리보기 배포 완료. 홈, 게임·편·장, 캐릭터, 검색, 평가·한줄평·좋아요에 이어 관리자 웹 편집·Excel 변경 검토/적용·설정·변경 기록과 게임별 통계를 구현했다. Google OAuth 공급자 설정, 운영자 계정 지정, Vercel의 GitHub 자동 배포 연결은 남아 있다.
 
 [미리보기 열기](https://subpidea-o427sx4td-tiredestests-projects.vercel.app) — Vercel 로그인이 필요하다.
 
@@ -11,6 +11,7 @@ Node.js 22.14 이상에서 `npm ci` 실행 후 `.env.example`을 `.env.local`로
 검증: `npm run typecheck`, `npm run build`, `python -m unittest discover -s tests -p "test_*.py"`. DB 권한 테스트는 `tests/rls.sql`이며 전체 트랜잭션을 rollback한다.
 
 - [운영 및 남은 설정](docs/operations.md)
+- [관리자 도구 사용법과 검증 결과](docs/admin-guide.md)
 
 Supabase: [subpidea · 서울](https://supabase.com/dashboard/project/lbeoipqedkjmekfntcdn). 생성 비용 월 $0을 확인하고 생성했으며 ACTIVE_HEALTHY 상태를 재조회해 확인했다.
 

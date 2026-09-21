@@ -12,17 +12,18 @@ export type Aggregate={id:string;average:number;count:number;reviewers:number};
 
 export const getCatalog=cache(async()=>{
  const db=publicDb();
+ async function all(table:string,orders:string[]){const rows:unknown[]=[];for(let start=0;;start+=500){let query=db.from(table).select('*');for(const column of orders)query=query.order(column,{ascending:true,nullsFirst:true});const {data,error}=await query.range(start,start+499);if(error)return {data:null,error};rows.push(...data);if(data.length<500)return {data:rows,error:null};if(rows.length>50000)throw Error('카탈로그 조회 범위를 초과했습니다.');}}
  const results=await Promise.all([
-  db.from('games').select('*').order('sort_order').order('id'),
-  db.from('story_arcs').select('*').order('sort_order').order('id'),
-  db.from('chapters').select('*').order('sort_order').order('id'),
-  db.from('characters').select('*').order('sort_order').order('id'),
-  db.from('appearances').select('chapter_id,character_id,sort_order').order('sort_order').order('character_id').limit(10000),
-  db.from('rating_summary').select('*').limit(10000),
+  all('games',['sort_order','id']),
+  all('story_arcs',['sort_order','id']),
+  all('chapters',['sort_order','id']),
+  all('characters',['sort_order','id']),
+  all('appearances',['chapter_id','sort_order','character_id']),
+  all('rating_summary',['chapter_id','character_id']),
   db.from('site_settings').select('key,value'),
-  db.from('game_rating_summary').select('*'),
-  db.from('arc_rating_summary').select('*'),
-  db.from('character_rating_summary').select('*'),
+  all('game_rating_summary',['id']),
+  all('arc_rating_summary',['id']),
+  all('character_rating_summary',['id']),
   db.from('community_stats').select('*').single(),
  ]);
  const failure=results.find(r=>r.error);if(failure?.error)throw new Error('콘텐츠를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
