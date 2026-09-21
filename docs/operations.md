@@ -24,9 +24,9 @@ Google Cloud 웹용 OAuth 클라이언트를 만든 후 Supabase Authentication�
 
 `tiredestest's projects` 팀의 무료 Hobby 요금제를 확인하고 `subpidea` 프로젝트에 Preview 배포했습니다. 사용자가 목적지와 미리보기 공개를 승인했고 공식 CLI 로그인도 완료했습니다.
 
-- 미리보기: https://subpidea-o427sx4td-tiredestests-projects.vercel.app
+- 미리보기: https://subpidea-g1kteasu7-tiredestests-projects.vercel.app
 - 프로젝트 ID: `prj_2OkgSjTE63cBu1i2CEOPxkywF8Fy`
-- 배포 ID: `dpl_D7FN3vT8M7Nd83Tb6MMevwzTQMZi`, READY
+- 배포 ID: `dpl_BPm5FyqKTrMC3L1sDAuEPDQ6Tv5B`, READY
 - 배포 보호가 켜져 있어 브라우저에서 Vercel 로그인이 필요합니다. 공식 `vercel curl`로 홈의 실제 카탈로그와 캐릭터 이미지 HTTP 200을 확인했습니다.
 - GitHub 소스는 저장됐지만 Vercel GitHub 자동 배포 연결은 실패했습니다. Vercel 프로젝트 Settings → Git에서 저장소 접근 권한을 연결해야 합니다. 현재는 CLI 수동 배포입니다.
 - 재배포 명령: `npx vercel@59.23.2 deploy --yes --target preview --scope tiredestests-projects`
@@ -43,3 +43,7 @@ Preview 환경에 Supabase URL과 publishable key를 설정했습니다. 서비�
 - 이미지 응답은 비공개 전환을 즉시 반영하도록 no-store입니다. 트래픽 증가 시 대역폭과 권한을 함께 고려한 캐시가 필요합니다.
 - 공개 저장소에 원본 자료·비밀 값은 포함하지 않습니다. 이미지 사용 권한, 운영 정책, 개인정보 안내는 서비스 공개 전에 확정해야 합니다.
 - 추가 플러그인은 필수가 아닙니다. GitHub·Supabase·Vercel 연결로 진행 가능하며 Figma는 디자인 협업 시 선택 사항입니다.
+
+## 후속 배포 검증
+
+2026-09-21 관리자 기능과 Excel 변경 검토·일괄 반영, 게임별 평가 통계를 Preview에 배포했습니다. 배포 빌드가 통과했고 실제 통계 페이지의 HTTP 200 및 콘텐츠, 비로그인 관리자 import 요청의 HTTP 403을 확인했습니다. 관리자 실제 로그인·저장 검증은 Google OAuth와 관리자 계정 지정 후 진행합니다.
