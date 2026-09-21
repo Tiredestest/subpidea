@@ -51,3 +51,12 @@ export async function applyAdminBatch(operations: Operation[]) {
     };
   }
 }
+export async function manageAppearance(input:{chapter:string;person:string;newPerson:string|null;active:boolean;position:number;expected:string|null}){
+ try{
+  const {db}=await requireAdmin();const uuid=/^[0-9a-f-]{36}$/i;
+  if(!uuid.test(input.chapter)||!uuid.test(input.person)||(input.newPerson&&!uuid.test(input.newPerson))||!Number.isInteger(input.position)||input.position<0||input.position>100000)throw Error('장·캐릭터·순서를 확인해 주세요.');
+  const {error}=await db.rpc('admin_manage_appearance',{chapter:input.chapter,person:input.person,new_person:input.newPerson,active:input.active,sort_position:input.position,expected:input.expected});
+  if(error)throw Error(error.code==='40001'?error.message:'적용하지 못했습니다. 이미 등록된 캐릭터인지, 같은 게임인지 확인해 주세요.');
+  revalidatePath('/','layout');return {ok:true};
+ }catch(e){return {ok:false,error:e instanceof Error?e.message:'저장 실패'};}
+}

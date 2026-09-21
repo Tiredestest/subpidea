@@ -24,7 +24,7 @@ Google Cloud 웹용 OAuth 클라이언트를 만든 후 Supabase Authentication�
 
 `tiredestest's projects` 팀의 무료 Hobby 요금제를 확인하고 `subpidea` 프로젝트에 Preview 배포했습니다. 사용자가 목적지와 미리보기 공개를 승인했고 공식 CLI 로그인도 완료했습니다.
 
-- 미리보기: https://subpidea-pav5hwgw7-tiredestests-projects.vercel.app
+- 미리보기: https://subpidea-preview-tiredestests-projects.vercel.app
 - 프로젝트 ID: `prj_2OkgSjTE63cBu1i2CEOPxkywF8Fy`
 - 배포 ID: `dpl_99xqFyva3jtaaTJJsvxYS34rpYGA`, READY
 - 배포 보호가 켜져 있어 브라우저에서 Vercel 로그인이 필요합니다. 공식 `vercel curl`로 홈의 실제 카탈로그와 캐릭터 이미지 HTTP 200을 확인했습니다.
@@ -59,3 +59,7 @@ Preview 환경에 Supabase URL과 publishable key를 설정했습니다. 서비�
 - 기준 문서: https://supabase.com/docs/guides/auth/server-side/advanced-guide
 
 보안 보완 Preview 배포 완료: 인증 콜백 HTTP 307, 사이트 내부 오류 페이지 이동, Cache-Control: private, no-store 및 Referrer-Policy: no-referrer를 실제 배포에서 확인했습니다. Google 공급자는 아직 비활성 상태입니다. 최초 설정은 [Google 로그인 설정 안내](google-login-setup.md)를 따릅니다.
+
+## 후속 기능
+
+마이페이지·닉네임 수정·게임 팔로우, 등장 캐릭터 추가/제외/복원/교체, 게임 헤더 업로드와 Excel GAMES 연결을 구현했습니다. [사용 안내](member-and-admin-followups.md)를 참고하세요. 재배포 시 scripts/deploy-preview.ps1을 사용해 고정 Preview 주소를 갱신합니다.

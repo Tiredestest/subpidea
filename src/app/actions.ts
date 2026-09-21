@@ -1,5 +1,7 @@
 'use server';
 import {userDb} from '@/lib/supabase/server';
+import {revalidatePath} from 'next/cache';
+import {nickname} from '@/lib/member-validation';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 async function signedIn(){const db=await userDb();const {data:{user}}=await db.auth.getUser();if(!user)throw new Error('로그인 후 이용해 주세요.');return {db,user};}
 function target(chapter:string,character:string|null){if(!uuid.test(chapter)||(character&&!uuid.test(character)))throw new Error('평가 대상을 확인해 주세요.');}
@@ -14,4 +16,20 @@ export async function likeComment(id:string,liked:boolean){try{if(!uuid.test(id)
 
 export async function removeRating(chapter:string,character:string|null){
  try{target(chapter,character);const {db,user}=await signedIn();let query=db.from('ratings').delete().eq('user_id',user.id).eq('chapter_id',chapter);query=character?query.eq('character_id',character):query.is('character_id',null);const {error}=await query;if(error)throw new Error('평가를 취소하지 못했어요.');return {ok:true};}catch(e){return {ok:false,error:e instanceof Error?e.message:'취소하지 못했어요.'};}
+}
+export async function saveNickname(value:string){
+ try{const name=nickname(value);const {db,user}=await signedIn();
+ const {data:profile,error:readError}=await db.from('profiles').select('id').eq('id',user.id).maybeSingle();
+ if(readError)throw Error('프로필을 읽지 못했습니다.');
+ const result=profile?await db.from('profiles').update({display_name:name}).eq('id',user.id):await db.from('profiles').insert({id:user.id,display_name:name});
+ if(result.error)throw Error('닉네임을 저장하지 못했습니다. 새로고침 후 다시 시도해 주세요.');
+ revalidatePath('/','layout');return {ok:true};
+ }catch(e){return {ok:false,error:e instanceof Error?e.message:'저장하지 못했습니다.'};}
+}
+export async function followGame(gameId:string,following:boolean){
+ try{if(!uuid.test(gameId)||typeof following!=='boolean')throw Error('게임을 확인해 주세요.');const {db,user}=await signedIn();
+ const result=following?await db.from('game_follows').insert({game_id:gameId,user_id:user.id}):await db.from('game_follows').delete().eq('game_id',gameId).eq('user_id',user.id);
+ if(result.error&&result.error.code!=='23505')throw Error('팔로우를 변경하지 못했습니다.');
+ revalidatePath('/me');return {ok:true};
+ }catch(e){return {ok:false,error:e instanceof Error?e.message:'변경하지 못했습니다.'};}
 }

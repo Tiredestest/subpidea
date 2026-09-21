@@ -22,6 +22,8 @@ export default async function AdminLayout({
       <nav className="admin-nav" aria-label="관리 메뉴">
         <Link href="/admin">현황</Link>
         <Link href="/admin/content">콘텐츠 편집</Link>
+        <Link href="/admin/appearances">등장 캐릭터</Link>
+        <Link href="/admin/images">게임 헤더</Link>
         <Link href="/admin/import">Excel 가져오기</Link>
         <Link href="/admin/settings">사이트 설정</Link>
         <Link href="/admin/history">변경 기록</Link>

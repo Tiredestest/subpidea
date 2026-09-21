@@ -74,6 +74,24 @@ export function parseWorkbook(
     appearances: [],
   };
   if (errors.length) return { errors, warnings, records };
+  // Optional game metadata sheet; blank/missing paths preserve existing images.
+  const gameSheet=sheets.find(s=>s.sheet==='GAMES');
+  if(gameSheet){
+    const headers=gameSheet.data[0]??[];
+    const fields=['source_id','hero_image','cover_image'];
+    if(fields.some(f=>headers.filter(h=>h===f).length!==1))errors.push('GAMES: 1행에 source_id, hero_image, cover_image 열이 각각 필요합니다.');
+    else {
+      const rows=gameSheet.data.slice(1).filter(row=>row.some(v=>v!==null&&v!==undefined&&v!==''));
+      if(rows.length!==1||rows[0][headers.indexOf('source_id')]!==config.game.source_id)errors.push('GAMES: 현재 게임 ID와 일치하는 한 행만 입력해 주세요.');
+      else for(const field of ['hero_image','cover_image']){
+        const value=rows[0][headers.indexOf(field)];
+        if(value===null||value===undefined||value==='')continue;
+        if(typeof value!=='string'||!new RegExp('^'+config.game.slug+'/stories/[A-Za-z0-9_-]+\\.webp$').test(value))errors.push(`GAMES: ${field}에는 해당 게임의 업로드된 WebP 경로를 입력해 주세요.`);
+        else records.games[0][field]=value;
+      }
+    }
+  }
+  if(errors.length)return {errors,warnings,records};
   if (Object.values(source).reduce((n, r) => n + r.length, 0) > 10000)
     return {
       errors: ["파일당 최대 10,000행을 지원합니다."],

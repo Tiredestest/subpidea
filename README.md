@@ -4,7 +4,7 @@
 
 현재 단계: 실제 데이터 입력·이미지 업로드·웹앱 구현 및 Vercel 미리보기 배포 완료. 홈, 게임·편·장, 캐릭터, 검색, 평가·한줄평·좋아요에 이어 관리자 웹 편집·Excel 변경 검토/적용·설정·변경 기록과 게임별 통계를 구현했다. Google OAuth 공급자 설정, 운영자 계정 지정, Vercel의 GitHub 자동 배포 연결은 남아 있다.
 
-[미리보기 열기](https://subpidea-pav5hwgw7-tiredestests-projects.vercel.app) — Vercel 로그인이 필요하다.
+[미리보기 열기](https://subpidea-preview-tiredestests-projects.vercel.app) — Vercel 로그인이 필요하다.
 
 Node.js 22.14 이상에서 `npm ci` 실행 후 `.env.example`을 `.env.local`로 복사하고 값을 설정한다. `npm run dev` 또는 `npm run build` 후 `npm start`로 실행한다.
 

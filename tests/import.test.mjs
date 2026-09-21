@@ -88,6 +88,15 @@ test("existing appearance order changes are previewed without deleting missing r
   assert.equal(result.plans[0].operation.table,'appearances');
   assert.deepEqual(result.plans[0].operation.patch,{sort_order:parsed.records.appearances[0].sort_order});
 });
+test('optional GAMES images are validated, previewed and preserve existing image when blank',()=>{
+ const withGame=structuredClone(sheets);withGame.push({sheet:'GAMES',data:[['source_id','hero_image','cover_image'],['BA','blue-archive/stories/GAME_HEADER_test.webp',null]]});
+ const result=parseWorkbook(withGame,config,'2026-09-21');assert.deepEqual(result.errors,[]);assert.equal(result.records.games[0].hero_image,'blue-archive/stories/GAME_HEADER_test.webp');
+ const snapshot=empty();for(const p of planImport(parsed,empty(),randomUUID).plans)snapshot[p.operation.table].push({...p.operation.patch,...p.operation.key,updated_at:'2026-09-21T00:00:00Z'});
+ snapshot.games[0].hero_image='blue-archive/stories/old.webp';snapshot.games[0].cover_image='blue-archive/stories/card.webp';
+ const plan=planImport(result,snapshot,randomUUID);assert.equal(plan.plans.length,1);assert.deepEqual(plan.plans[0].operation.patch,{hero_image:'blue-archive/stories/GAME_HEADER_test.webp'});
+ withGame.at(-1).data[1][1]='';assert.equal(planImport(parseWorkbook(withGame,config,'2026-09-21'),snapshot,randomUUID).plans.length,0);
+ for(const invalid of ['https://evil.test/a.webp','other-game/stories/a.webp','blue-archive/stories/../../bad.webp']){withGame.at(-1).data[1][1]=invalid;assert.ok(parseWorkbook(withGame,config,'2026-09-21').errors.length);}
+});
 test("missing columns and stale lookup values block all changes", () => {
   const bad = structuredClone(sheets);
   bad.find((s) => s.sheet === "CHARACTERS").data[2][1] = "wrong";

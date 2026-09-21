@@ -89,6 +89,16 @@ export async function POST(request: Request) {
       day: "2-digit",
     }).format(new Date());
     const parsed = parseWorkbook(sheets, mapping, today);
+    if(!parsed.errors.length){
+      const {db}=await requireAdmin();
+      for(const field of ['hero_image','cover_image']){
+        const path=parsed.records.games[0][field];
+        if(typeof path!=='string')continue;
+        const slash=path.lastIndexOf('/');const name=path.slice(slash+1);
+        const {data,error}=await db.storage.from('content').list(path.slice(0,slash),{search:name,limit:100});
+        if(error||!data?.some(item=>item.name===name))parsed.errors.push(`GAMES: ${field} 이미지가 없습니다. 게임 헤더 메뉴에서 먼저 업로드해 주세요.`);
+      }
+    }
     const plan = planImport(parsed, await adminSnapshot(), randomUUID);
     return Response.json(
       {
