@@ -17,3 +17,12 @@
 .story-filters a[aria-current="page"]{color:var(--ink,#142d50);border-bottom-color:var(--blue,#3478ed)}
 .story-filters a span{font-size:16px;font-weight:500}
 .story-filters a:focus-visible{outline:2px solid #3478ed;outline-offset:5px;border-radius:3px}
+
+.bulk-image-controls{border:0;padding:0;display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.bulk-image-controls label{display:grid;gap:8px}.bulk-image-controls select{padding:10px;border:1px solid #d8dfeb;border-radius:8px}
+.bulk-image-drop{grid-column:1/-1;border:2px dashed #a5b9dc;border-radius:12px;padding:24px;background:#f8faff}
+.bulk-image-controls>p{grid-column:1/-1}.bulk-image-controls button{justify-self:start}
+.bulk-image-preview{object-fit:contain;background:#f3f5f9;border-radius:6px}
+.bulk-image-table{width:100%;min-width:640px}.bulk-image-table td{vertical-align:top;overflow-wrap:anywhere;max-width:300px}.bulk-image-table p{margin:4px 0}
+.bulk-image-confirm{display:flex;align-items:flex-start;gap:10px;margin:20px 0}
+@media(max-width:600px){.bulk-image-controls{grid-template-columns:1fr}.bulk-image-drop{padding:16px}}

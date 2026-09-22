@@ -62,6 +62,9 @@ test("import is idempotent, preserves publication/images/order and missing recor
   snapshot.games[0].is_published = true;
   snapshot.characters[0].image = "retained.webp";
   snapshot.characters[0].sort_order = 999;
+  const event=snapshot.story_arcs.find(r=>r.story_kind==='event');
+  event.cover_image='blue-archive/stories/ASSET_manual_card.webp';
+  snapshot.chapters.find(r=>r.arc_id===event.id).detail_image='blue-archive/stories/ASSET_manual_detail.webp';
   const again = planImport(parsed, snapshot, randomUUID);
   assert.equal(again.plans.length, 0);
   assert.equal(again.unchanged, 1712);

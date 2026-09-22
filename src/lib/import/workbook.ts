@@ -406,7 +406,8 @@ export function planImport(
             "sort_order",
           ]);
           patch = Object.fromEntries(
-            Object.entries(values).filter(([k]) => !preserve.has(k)),
+            Object.entries(values).filter(([k]) => !preserve.has(k) &&
+              !(table!=='games' && ['cover_image','detail_image','image','thumbnail'].includes(k) && existing?.[k])),
           );
         } else {
           patch = {
